@@ -97,6 +97,12 @@ HAVING diffDate > 50
 ORDER BY diffDate DESC 
 
 
-/* l Acteurs ayant joué dans 3 films ou plus /
+/* l Acteurs ayant joué dans 3 films ou plus */
 
 
+SELECT prenom, nom, COUNT(c.id_acteur) AS nbFilm
+FROM acteur a
+INNER JOIN personne p ON a.id_personne = p.id_personne
+INNER JOIN casting c ON c.id_acteur = a.id_acteur
+GROUP BY c.id_acteur 
+HAVING COUNT(c.id_acteur) >= 3
